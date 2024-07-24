@@ -11,4 +11,6 @@ public interface UtilDao {
 
 	List<UtilVo> getBookOrdersByDate(String date);
 
+	List<UtilVo> getBookOrders();
+
 }
