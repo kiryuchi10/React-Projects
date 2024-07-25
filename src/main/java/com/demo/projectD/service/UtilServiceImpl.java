@@ -11,15 +11,37 @@ import com.demo.projectD.repository.vo.UtilVo;
 
 @Primary
 @Service
-public class UtilServiceImpl implements UtilService{
-	
-	@Autowired
-	UtilDao utilDao;
-	
-	@Override
-	public List<UtilVo> getBookOrdersByDate(String date) {
-		List<UtilVo> list=utilDao.getBookOrdersByDate(date);
-		return list;
-	}
-	
+public class UtilServiceImpl implements UtilService {
+    
+    @Autowired
+    private UtilDao utilDao;  // Injecting UtilDao
+
+    /**
+     * Fetches all book orders.
+     * @return List of all book orders
+     */
+    @Override
+    public List<UtilVo> getBookOrders() {
+        try {
+            return utilDao.getBookOrders();
+        } catch (Exception e) {
+            // Handle exception (log it, rethrow it, etc.)
+            throw new RuntimeException("Failed to fetch book orders", e);
+        }
+    }
+
+    /**
+     * Fetches book orders by a specific date.
+     * @param date The date to filter book orders
+     * @return List of book orders for the specified date
+     */
+    @Override
+    public List<UtilVo> getBookOrdersByDate(String date) {
+        try {
+            return utilDao.getBookOrdersByDate(date);
+        } catch (Exception e) {
+            // Handle exception (log it, rethrow it, etc.)
+            throw new RuntimeException("Failed to fetch book orders by date", e);
+        }
+    }
 }

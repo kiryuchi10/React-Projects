@@ -9,6 +9,8 @@ import com.demo.projectD.repository.vo.UtilVo;
 @Service
 public interface UtilService {
 
+
+	List<UtilVo> getBookOrders();
 	List<UtilVo> getBookOrdersByDate(String date);
 
 }

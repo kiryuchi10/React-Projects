@@ -2,10 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="utils">
-	<select id="findOrdersByDate" parameterType="String"
-	 resultType="com.demo.projectD.repository.vo.UtilVo">
-		SELECT *
-		FROM book_order
-		WHERE orderDate=#{date}
-	</select>
+    <select id="findAllOrders" resultType="com.demo.projectD.repository.vo.UtilVo">
+        SELECT order_id AS orderId,
+               branch_id AS branchId,
+               order_date AS orderDate,
+               checked AS checked
+        FROM book_order
+    </select>
+
+    <select id="findOrdersByDate" parameterType="String"
+            resultType="com.demo.projectD.repository.vo.UtilVo">
+        SELECT order_id AS orderId,
+               branch_id AS branchId,
+               order_date AS orderDate,
+               checked AS checked
+        FROM book_order
+        WHERE order_date = TO_DATE(#{date}, 'YYYY-MM-DD')
+    </select>
 </mapper>

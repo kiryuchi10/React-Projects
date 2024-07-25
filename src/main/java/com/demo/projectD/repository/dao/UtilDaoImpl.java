@@ -16,9 +16,16 @@ public class UtilDaoImpl implements UtilDao{
 	SqlSession sqlSession;
 	
 	@Override
+	public List<UtilVo> getBookOrders() {
+		return sqlSession.selectList("utils.findAllOrders");
+	}
+
+	
+	@Override
 	public List<UtilVo> getBookOrdersByDate(String date) {
 		List<UtilVo> list=sqlSession.selectList("utils.findBookOrdersByDate");
 		return list;
 	}
 
+	
 }
