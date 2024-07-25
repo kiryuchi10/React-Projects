@@ -16,19 +16,20 @@ import com.demo.projectD.service.UtilService;
 @RestController
 @RequestMapping("/api")
 public class UtilController {
-private static final Logger logger = LoggerFactory.getLogger(UtilController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(UtilController.class);
+
 	@Autowired
 	UtilService utilService;
-	
 
 	@GetMapping("/orders/all")
-    public List<UtilVo> getBookOrders() {
-        return utilService.getBookOrders(); // Adjust method name if necessary
-    }
+	public List<UtilVo> getBookOrders() {
+		logger.info("Fetching all book orders");
+		return utilService.getBookOrders();
+	}
 
-    @GetMapping("/orders/{date}")
-    public List<UtilVo> getOrdersByDate(@PathVariable String date) {
-        return utilService.getBookOrdersByDate(date);
-    }
+	@GetMapping("/orders/{date}")
+	public List<UtilVo> getOrdersByDate(@PathVariable String date) {
+		logger.info("Fetching book orders for date: {}", date);
+		return utilService.getBookOrdersByDate(date);
+	}
 }
