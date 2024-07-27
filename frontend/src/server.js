@@ -13,10 +13,22 @@ app.use(express.json());
 
 // Oracle DB configuration
 const dbConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  connectString: process.env.DB_CONNECT_STRING,
+  user: process.env.DB_USER || 'project2',
+  password: process.env.DB_PASSWORD || 'project2',
+  connectString: process.env.DB_CONNECT_STRING || 'localhost:1521/xe',
 };
+
+// Example route for testing connection
+app.get('/test-db', async (req, res) => {
+  try {
+    const connection = await oracledb.getConnection(dbConfig);
+    res.send('Database connection successful!');
+    await connection.close();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Database connection failed');
+  }
+});
 
 // Routes and other server code...
 
