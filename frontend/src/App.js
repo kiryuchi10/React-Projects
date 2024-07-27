@@ -9,13 +9,14 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [hoveredOrders, setHoveredOrders] = useState([]);
+  const [tooltipPosition, setTooltipPosition] = useState({ top: '0px', left: '0px', display: 'none' });
 
   useEffect(() => {
     // Fetch orders from your endpoint
     axios.get('/api/orders/all')
       .then(response => {
         const ordersArray = response.data.map(item => ({
-          orderDate: item.orderDate,
+          orderDate: item.orderDate.split('T')[0], // Format date for comparison
           orderId: item.orderId,
           bookName: item.bookName,
           checked: item.checked
@@ -25,11 +26,22 @@ const App = () => {
       .catch(error => console.error('Error fetching orders:', error));
   }, []);
 
-  const onDateHover = (date) => {
+  const onDateHover = (event, date) => {
+    const dateString = date.toISOString().split('T')[0];
+    const filteredOrders = orders.filter(order => order.orderDate === dateString);
     setHoveredDate(date);
-    const hoveredDateString = date.toISOString().split('T')[0];
-    const filteredOrders = orders.filter(order => order.orderDate.startsWith(hoveredDateString));
     setHoveredOrders(filteredOrders);
+
+    const { top, left } = event.currentTarget.getBoundingClientRect();
+    setTooltipPosition({
+      top: `${top + 40}px`, // Position the tooltip below the hovered date
+      left: `${left}px`,
+      display: 'block'
+    });
+  };
+
+  const onDateLeave = () => {
+    setTooltipPosition({ display: 'none' });
   };
 
   return (
@@ -38,22 +50,26 @@ const App = () => {
       <Calendar
         onChange={setDate}
         value={date}
-        tileContent={({ date, view }) => {
+        tileContent={({ date }) => {
           const dateString = date.toISOString().split('T')[0];
-          const dailyOrders = orders.filter(order => order.orderDate.startsWith(dateString));
+          const dailyOrders = orders.filter(order => order.orderDate === dateString);
           return (
             dailyOrders.length > 0 && (
-              <div className="dot">
+              <div
+                className="dot"
+                data-date={dateString}
+                onMouseOver={(e) => onDateHover(e, date)}
+                onMouseLeave={onDateLeave}
+              >
                 {dailyOrders.length}
               </div>
             )
           );
         }}
-        onMouseOver={({ activeStartDate, date, view }) => onDateHover(date)}
       />
-      {hoveredDate && hoveredOrders.length > 0 && (
-        <div className="tooltip" style={{ top: `${hoveredDate.clientY}px`, left: `${hoveredDate.clientX}px` }}>
-          <h3>Orders on {hoveredDate.toDateString()}</h3>
+      {hoveredOrders.length > 0 && (
+        <div className="tooltip" style={tooltipPosition}>
+          <h3>Orders on {hoveredDate?.toDateString()}</h3>
           <ul>
             {hoveredOrders.map(order => (
               <li key={order.orderId}>
