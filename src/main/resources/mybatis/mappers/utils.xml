@@ -10,13 +10,12 @@
         FROM book_order
     </select>
 
-    <select id="findOrdersByDate" parameterType="String"
-            resultType="com.demo.projectD.repository.vo.UtilVo">
+    <select id="findOrdersByDate" parameterType="String" resultType="com.demo.projectD.repository.vo.UtilVo">
         SELECT order_id AS orderId,
                branch_id AS branchId,
-               order_date AS orderDate,
+               TO_CHAR(order_date, 'YYYY/MM/DD') AS orderDate,
                checked AS checked
         FROM book_order
-        WHERE order_date = TO_DATE(#{date}, 'YYYY-MM-DD')
+        WHERE TO_CHAR(order_date, 'YYYY/MM/DD') = #{date}
     </select>
 </mapper>

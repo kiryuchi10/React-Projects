@@ -5,6 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +24,18 @@ public class UtilController {
 	@Autowired
 	UtilService utilService;
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/orders/all")
-	public List<UtilVo> getBookOrders() {
+	public List<UtilVo> getBookOrders(Model model) {
 		logger.info("Fetching all book orders");
+		List<UtilVo> orderDetails =utilService.getBookOrders();
+		model.addAttribute("orderDetails",orderDetails);
 		return utilService.getBookOrders();
 	}
-
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/orders/{date}")
-	public List<UtilVo> getOrdersByDate(@PathVariable String date) {
+	public List<UtilVo> getOrdersByDate(@PathVariable String date,Model model) {
 		logger.info("Fetching book orders for date: {}", date);
 		return utilService.getBookOrdersByDate(date);
 	}
