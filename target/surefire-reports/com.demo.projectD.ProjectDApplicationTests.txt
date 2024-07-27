@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: com.demo.projectD.ProjectDApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.128 s <<< FAILURE! - in com.demo.projectD.ProjectDApplicationTests
+com.demo.projectD.ProjectDApplicationTests  Time elapsed: 0.123 s  <<< ERROR!
+java.lang.NoSuchMethodError: 'java.lang.ClassLoader ch.qos.logback.core.util.Loader.systemClassloaderIfNull(java.lang.ClassLoader)'
+

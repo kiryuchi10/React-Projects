@@ -16,7 +16,7 @@
 
 
 	<typeAliases>
-		<typeAlias type="com.demo.projectD.repository.vo.UtilsVo" alias="UtilsVo" />
+		<typeAlias type="com.demo.projectD.repository.vo.UtilVo" alias="UtilVo" />
 	</typeAliases>
 
     <mappers>
