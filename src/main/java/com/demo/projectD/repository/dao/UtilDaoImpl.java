@@ -1,6 +1,8 @@
 package com.demo.projectD.repository.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,21 @@ public class UtilDaoImpl implements UtilDao{
 		List<UtilVo> list=sqlSession.selectList("utils.findBookOrdersByDate");
 		return list;
 	}
+
+
+	@Override
+	public UtilVo findUserByName(String name) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("utils.findUserByName");
+	}
+
+
+	public void addUser(String name, String password) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", name);
+        params.put("password", password);
+        sqlSession.insert("com.demo.projectD.repository.UtilDao.addUser", params);
+    }
 
 	
 }

@@ -13,8 +13,8 @@ app.use(express.json());
 
 // Oracle DB configuration
 const dbConfig = {
-  user: process.env.DB_USER || 'project2',
-  password: process.env.DB_PASSWORD || 'project2',
+  user: process.env.DB_USER || 'project3',
+  password: process.env.DB_PASSWORD || 'project3',
   connectString: process.env.DB_CONNECT_STRING || 'localhost:1521/xe',
 };
 

@@ -1,53 +1,88 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar'; // Import the Calendar component
-import 'react-calendar/dist/Calendar.css'; // Import the default CSS styles for the calendar
+/*import React, { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
+import './App.css';
 
-const API_BASE_URL = 'http://localhost:8080';
+const App = () => {
+  const [date, setDate] = useState(new Date());
+  const [orders, setOrders] = useState([]);
+  const [hoveredDate, setHoveredDate] = useState(null);
+  const [hoveredOrders, setHoveredOrders] = useState([]);
+  const [tooltipPosition, setTooltipPosition] = useState({ top: '0px', left: '0px', display: 'none' });
 
-// Define your CalendarComponent
-const CalendarComponent = ({ onDateClick }) => {
-    const [date, setDate] = useState(new Date());
+  useEffect(() => {
+    // Fetch orders from your endpoint
+    axios.get('/api/orders/all')
+      .then(response => {
+        const ordersArray = response.data.map(item => ({
+          orderDate: item.orderDate.split('T')[0], // Format date for comparison
+          orderId: item.orderId,
+          bookName: item.bookName,
+          checked: item.checked
+        }));
+        setOrders(ordersArray);
+      })
+      .catch(error => console.error('Error fetching orders:', error));
+  }, []);
 
-    // Handle date change
-    const handleDateChange = (newDate) => {
-        setDate(newDate); // Update the selected date
-        onDateClick(newDate.toISOString().split('T')[0]); // Format date and pass it to parent
-    };
+  const onDateHover = (event, date) => {
+    const dateString = date.toISOString().split('T')[0];
+    const filteredOrders = orders.filter(order => order.orderDate === dateString);
+    setHoveredDate(date);
+    setHoveredOrders(filteredOrders);
 
-    return (
-        <div>
-            <Calendar
-                onChange={handleDateChange} // Set the date change handler
-                value={date} // Controlled value of the calendar
-            />
+    const { top, left } = event.currentTarget.getBoundingClientRect();
+    setTooltipPosition({
+      top: `${top + 40}px`, // Position the tooltip below the hovered date
+      left: `${left}px`,
+      display: 'block'
+    });
+  };
+
+  const onDateLeave = () => {
+    setTooltipPosition({ display: 'none' });
+  };
+
+  return (
+    <div className="App">
+      <h1>Order Calendar</h1>
+      <Calendar
+        onChange={setDate}
+        value={date}
+        tileContent={({ date }) => {
+          const dateString = date.toISOString().split('T')[0];
+          const dailyOrders = orders.filter(order => order.orderDate === dateString);
+          return (
+            dailyOrders.length > 0 && (
+              <div
+                className="dot"
+                data-date={dateString}
+                onMouseOver={(e) => onDateHover(e, date)}
+                onMouseLeave={onDateLeave}
+              >
+                {dailyOrders.length}
+              </div>
+            )
+          );
+        }}
+      />
+      {hoveredOrders.length > 0 && (
+        <div className="tooltip" style={tooltipPosition}>
+          <h3>Orders on {hoveredDate?.toDateString()}</h3>
+          <ul>
+            {hoveredOrders.map(order => (
+              <li key={order.orderId}>
+                <p>Order ID: {order.orderId}</p>
+                <p>Checked: {order.checked}</p>
+                <p>Book Name: {order.bookName || 'N/A'}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
-// Export CalendarComponent as default
-export default CalendarComponent;
-
-
-
-// Fetch all book orders
-export const getBookOrders = async () => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/orders/all`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching book orders', error);
-        throw error;
-    }
-};
-
-// Fetch book orders by date
-export const getOrdersByDate = async (date) => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/orders/${date}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching orders by date', error);
-        throw error;
-    }
-};
+export default App;*/

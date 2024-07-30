@@ -1,41 +1,29 @@
 import React, { useState } from 'react';
-import CalendarComponent from './components/Calendar'; // Import CalendarComponent
-import OrdersList from './components/OrdersList';
-import { getBookOrders, getOrdersByDate } from './apiService'; // Import API functions
+import Login from './components/Login';
+import Signup from './components/Signup';
 
-const App = () => {
-    const [orders, setOrders] = useState([]);
-    const [selectedDate, setSelectedDate] = useState('');
+function App() {
+  const [activeComponent, setActiveComponent] = useState('login'); // Track which component is active
+  const [message, setMessage] = useState('');
 
-    // Function to fetch all orders
-    const fetchAllOrders = async () => {
-        try {
-            const allOrders = await getBookOrders();
-            setOrders(allOrders);
-        } catch (error) {
-            console.error('Error fetching all orders', error);
-        }
-    };
+  const handleComponentChange = (component) => {
+    setActiveComponent(component);
+  };
 
-    // Handle date click event
-    const handleDateClick = async (date) => {
-        try {
-            const ordersForDate = await getOrdersByDate(date);
-            setOrders(ordersForDate);
-            setSelectedDate(date);
-        } catch (error) {
-            console.error('Error fetching orders for date', error);
-        }
-    };
-
-    return (
-        <div className="App">
-            <h1>Book Orders Calendar</h1>
-            <button onClick={fetchAllOrders}>Fetch All Orders</button>
-            <CalendarComponent onDateClick={handleDateClick} />
-            <OrdersList orders={orders} selectedDate={selectedDate} />
-        </div>
-    );
-};
+  return (
+    <div className="App">
+      <h1>User Management</h1>
+      <div className="button-container">
+        <button onClick={() => handleComponentChange('login')}>Login</button>
+        <button onClick={() => handleComponentChange('signup')}>Signup</button>
+      </div>
+      <div className="form-container">
+        {activeComponent === 'login' && <Login setMessage={setMessage} />}
+        {activeComponent === 'signup' && <Signup setMessage={setMessage} />}
+      </div>
+      <div className="message">{message}</div>
+    </div>
+  );
+}
 
 export default App;

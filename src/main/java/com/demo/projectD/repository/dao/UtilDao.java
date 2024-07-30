@@ -2,6 +2,7 @@ package com.demo.projectD.repository.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.demo.projectD.repository.vo.UtilVo;
@@ -12,5 +13,9 @@ public interface UtilDao {
 	List<UtilVo> getBookOrdersByDate(String date);
 
 	List<UtilVo> getBookOrders();
+
+	UtilVo findUserByName(@Param("name") String name);
+
+	void addUser(@Param("name") String name, @Param("password") String password);
 
 }

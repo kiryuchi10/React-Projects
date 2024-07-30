@@ -44,4 +44,12 @@ public class UtilServiceImpl implements UtilService {
             throw new RuntimeException("Failed to fetch book orders by date", e);
         }
     }
+    
+    public UtilVo getUserByName(String name) {
+        return utilDao.findUserByName(name);
+    }
+
+    public void addUser(String name, String password) {
+        utilDao.addUser(name, password);
+    }
 }
