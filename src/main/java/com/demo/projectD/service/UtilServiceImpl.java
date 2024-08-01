@@ -2,12 +2,14 @@ package com.demo.projectD.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.demo.projectD.repository.dao.UtilDao;
 import com.demo.projectD.repository.vo.UtilVo;
+
 
 @Primary
 @Service
@@ -45,11 +47,18 @@ public class UtilServiceImpl implements UtilService {
         }
     }
     
-    public UtilVo getUserByName(String name) {
-        return utilDao.findUserByName(name);
+    @Override
+    public void registerUser(UtilVo user) {
+        // Add validation or business logic here if needed
+        utilDao.addUser(user);
     }
 
-    public void addUser(String name, String password) {
-        utilDao.addUser(name, password);
+    @Override
+    public UtilVo login(String email, String password) {
+        UtilVo user = utilDao.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null; // Or throw an exception if preferred
     }
 }

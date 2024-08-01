@@ -14,8 +14,9 @@ public interface UtilDao {
 
 	List<UtilVo> getBookOrders();
 
-	UtilVo findUserByName(@Param("name") String name);
+	void addUser(UtilVo user);
 
-	void addUser(@Param("name") String name, @Param("password") String password);
+	UtilVo findByEmail(String email);
 
+	
 }

@@ -2,11 +2,10 @@ package com.demo.projectD.controller;
 
 import java.util.List;
 
-import org.apache.http.HttpStatus;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.projectD.repository.vo.UtilVo;
 import com.demo.projectD.service.UtilService;
+
 
 @RestController
 @RequestMapping("/api")
@@ -43,18 +43,18 @@ public class UtilController {
 		return utilService.getBookOrdersByDate(date);
 	}
 
-	@GetMapping("/login")
-	public String login(@RequestParam("name") String name) {
-		UtilVo utilVo = utilService.getUserByName(name);
-		if (utilVo == null) {
-			return "User not found";
-		}
-		return "Login successful";
+	@PostMapping("/signup")
+	public String signup(@RequestBody UtilVo util) {
+		utilService.registerUser(util);
+		return "Util registered successfully";
 	}
 
-	@PostMapping("/signup")
-	public String signup(@RequestBody UtilVo signupRequest) {
-		utilService.addUser(signupRequest.getName(), signupRequest.getPassword());
-		return "Signup successful";
+	@PostMapping("/login")
+	public UtilVo login(@RequestParam String email, @RequestParam String password) {
+		UtilVo Util = utilService.login(email, password);
+		if (Util != null) {
+			return Util;
+		}
+		throw new RuntimeException("Invalid credentials");
 	}
 }

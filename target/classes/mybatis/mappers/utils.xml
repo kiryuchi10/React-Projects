@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="utils">
+
+    <!-- Query to find all orders -->
     <select id="findAllOrders" resultType="com.demo.projectD.repository.vo.UtilVo">
         SELECT order_id AS orderId,
                branch_id AS branchId,
@@ -10,22 +12,42 @@
         FROM book_order
     </select>
 
+    <!-- Query to find orders by date -->
     <select id="findOrdersByDate" parameterType="String" resultType="com.demo.projectD.repository.vo.UtilVo">
         SELECT order_id AS orderId,
                branch_id AS branchId,
-               TO_CHAR(order_date, 'YYYY/MM/DD') AS orderDate,
+               order_date AS orderDate, <!-- Use actual column for better accuracy -->
                checked AS checked
         FROM book_order
         WHERE TO_CHAR(order_date, 'YYYY/MM/DD') = #{date}
     </select>
-    
-     <select id="findUserByName" parameterType="String" resultType="com.demo.projectD.repository.vo.UtilVo">
-        SELECT * FROM users WHERE name = #{name}
+
+    <!-- Query to add a user -->
+    <insert id="addUser" parameterType="com.demo.projectD.repository.vo.UtilVo">
+        INSERT INTO users (user_no, user_name, password, branch_id, auth_code)
+        VALUES (#{userNo}, #{userName}, #{password}, #{branchId}, #{authCode})
+    </insert>
+
+    <!-- Query to find a user by email -->
+    <select id="findByEmail" parameterType="String" resultType="com.demo.projectD.repository.vo.UtilVo">
+        SELECT user_no AS userNo,
+               user_name AS userName,
+               password,
+               branch_id AS branchId,
+               auth_code AS authCode
+        FROM users
+        WHERE user_name = #{userName}
     </select>
 
-<!-- Query to add a user -->
-    <insert id="addUser" parameterType="map">
-        INSERT INTO users (name, password, joinDate)
-        VALUES (#{name}, #{password}, SYSDATE)
-    </insert>
+    <!-- Query to find a user by email for login -->
+    <select id="findByEmailForLogin" parameterType="String" resultType="com.demo.projectD.repository.vo.UtilVo">
+        SELECT user_no AS userNo,
+               user_name AS userName,
+               password,
+               branch_id AS branchId,
+               auth_code AS authCode
+        FROM users
+        WHERE user_name = #{userName}
+    </select>
+
 </mapper>
