@@ -9,10 +9,12 @@ public class UtilVo {
 	private long userNo;
 	private String userName;
 	private String password;
+	private String branchId;
+	private String authCode;
 	private String joinDate;
 	
-	public UtilVo(String orderDate, long orderId, String bookName, int checked, long userNo, String userName, String password,
-			String joinDate) {
+	public UtilVo(String orderDate, long orderId, String bookName, int checked, long userNo, String userName,
+			String password, String branchId, String authCode, String joinDate) {
 		super();
 		this.orderDate = orderDate;
 		this.orderId = orderId;
@@ -21,6 +23,8 @@ public class UtilVo {
 		this.userNo = userNo;
 		this.userName = userName;
 		this.password = password;
+		this.branchId = branchId;
+		this.authCode = authCode;
 		this.joinDate = joinDate;
 	}
 	public String getOrderDate() {
@@ -65,6 +69,18 @@ public class UtilVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(String branchId) {
+		this.branchId = branchId;
+	}
+	public String getAuthCode() {
+		return authCode;
+	}
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
 	public String getJoinDate() {
 		return joinDate;
 	}
@@ -74,7 +90,8 @@ public class UtilVo {
 	@Override
 	public String toString() {
 		return "UtilVo [orderDate=" + orderDate + ", orderId=" + orderId + ", bookName=" + bookName + ", checked="
-				+ checked + ", no=" + userNo + ", name=" + userName + ", password=" + password + ", joinDate=" + joinDate + "]";
+				+ checked + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password + ", branchId="
+				+ branchId + ", authCode=" + authCode + ", joinDate=" + joinDate + "]";
 	}
 	
 	

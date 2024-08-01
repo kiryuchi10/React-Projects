@@ -5,12 +5,16 @@ const Signup = () => {
     const [userNo, setUserNo] = useState('');
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [branchId, setBranchId] = useState('');
+    const [authCode, setAuthCode] = useState('');
 
     const handleSignup = () => {
         axios.post('http://localhost:8080/api/signup', {
-            no: userNo,
-            name: userName,
-            password: password
+            userNo: userNo,
+            userName: userName,
+            password: password,
+            branchId: branchId,
+            authCode: authCode
         })
         .then(response => {
             alert(response.data);
@@ -40,6 +44,18 @@ const Signup = () => {
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+            />
+            <input
+                type="text"
+                placeholder="Branch ID"
+                onChange={(e) => setBranchId(e.target.value)}
+                value={branchId}
+            />
+            <input
+                type="text"
+                placeholder="Auth Code"
+                onChange={(e) => setAuthCode(e.target.value)}
+                value={authCode}
             />
             <button onClick={handleSignup}>Sign Up</button>
         </div>
