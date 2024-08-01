@@ -12,7 +12,8 @@ public interface UtilService {
 
 	List<UtilVo> getBookOrders();
 	List<UtilVo> getBookOrdersByDate(String date);
-	UtilVo getUserByName(String name);
-	void addUser(String name, String password);
+	
+	void registerUser(UtilVo user);
+	UtilVo login(String userName, String password);
 
 }

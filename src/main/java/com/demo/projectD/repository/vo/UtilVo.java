@@ -1,33 +1,36 @@
 package com.demo.projectD.repository.vo;
 
-import java.util.Date;
-
 public class UtilVo {
-	private Date orderDate;
+	private String orderDate;
 	private long orderId;
 	private String bookName;
 	private int checked;
 	
-	private long no;
-	private String name;
+	private long userNo;
+	private String userName;
 	private String password;
+	private String branchId;
+	private String authCode;
 	private String joinDate;
-	public UtilVo(Date orderDate, long orderId, String bookName, int checked, long no, String name, String password,
-			String joinDate) {
+	
+	public UtilVo(String orderDate, long orderId, String bookName, int checked, long userNo, String userName,
+			String password, String branchId, String authCode, String joinDate) {
 		super();
 		this.orderDate = orderDate;
 		this.orderId = orderId;
 		this.bookName = bookName;
 		this.checked = checked;
-		this.no = no;
-		this.name = name;
+		this.userNo = userNo;
+		this.userName = userName;
 		this.password = password;
+		this.branchId = branchId;
+		this.authCode = authCode;
 		this.joinDate = joinDate;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public long getOrderId() {
@@ -48,23 +51,35 @@ public class UtilVo {
 	public void setChecked(int checked) {
 		this.checked = checked;
 	}
-	public long getNo() {
-		return no;
+	public long getUserNo() {
+		return userNo;
 	}
-	public void setNo(long no) {
-		this.no = no;
+	public void setUserNo(long userNo) {
+		this.userNo = userNo;
 	}
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(String branchId) {
+		this.branchId = branchId;
+	}
+	public String getAuthCode() {
+		return authCode;
+	}
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
 	}
 	public String getJoinDate() {
 		return joinDate;
@@ -75,7 +90,8 @@ public class UtilVo {
 	@Override
 	public String toString() {
 		return "UtilVo [orderDate=" + orderDate + ", orderId=" + orderId + ", bookName=" + bookName + ", checked="
-				+ checked + ", no=" + no + ", name=" + name + ", password=" + password + ", joinDate=" + joinDate + "]";
+				+ checked + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password + ", branchId="
+				+ branchId + ", authCode=" + authCode + ", joinDate=" + joinDate + "]";
 	}
 	
 	

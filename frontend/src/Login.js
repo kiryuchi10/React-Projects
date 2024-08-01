@@ -8,20 +8,20 @@ const Login = ({ setMessage }) => {
         e.preventDefault();
         try {
             const response = await fetch('http://localhost:8080/api/login', {
-                method: 'POST',  // Use POST for sending sensitive information like passwords
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, password })  // Send both name and password in the request body
+                body: JSON.stringify({ name, password })
             });
             if (response.ok) {
                 const data = await response.text();
-                setMessage(`Login successful! Username: ${name}, Password: ${password}`);  // Show username and password
+                setMessage(data);
             } else {
-                setMessage(`Login failed. Status: ${response.status}`);
+                setMessage('Login failed');
             }
         } catch (error) {
-            setMessage('Login failed due to an error.');
+            setMessage('Login failed');
         }
     };
 

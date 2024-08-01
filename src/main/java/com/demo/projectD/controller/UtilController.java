@@ -2,11 +2,9 @@ package com.demo.projectD.controller;
 
 import java.util.List;
 
-import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,28 +41,21 @@ public class UtilController {
 		return utilService.getBookOrdersByDate(date);
 	}
 
-	@GetMapping("/login")
-	public String login(@RequestParam("name") String name) {
-		UtilVo utilVo = utilService.getUserByName(name);
-		if (utilVo == null) {
-			return "User not found";
-		}
-		return "Login successful";
+	
+
+	@PostMapping("/signup")
+	public String signup(@RequestBody UtilVo user) {
+		utilService.registerUser(user);
+		return "User registered successfully";
 	}
 
-<<<<<<< Updated upstream
-	@PostMapping("/signup")
-	public String signup(@RequestBody UtilVo signupRequest) {
-		utilService.addUser(signupRequest.getName(), signupRequest.getPassword());
-		return "Signup successful";
-=======
 	@PostMapping("/login")
 	public UtilVo login(@RequestParam String userName, @RequestParam String password) {
-		UtilVo Util = utilService.login(userName, password);
-		if (Util != null) {
-			return Util;
+		UtilVo user = utilService.login(userName, password);
+		if (user != null) {
+			return user;
 		}
 		throw new RuntimeException("Invalid credentials");
->>>>>>> Stashed changes
 	}
+
 }

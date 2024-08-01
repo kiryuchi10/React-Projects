@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.demo.projectD.repository.dao.UtilDao;
 import com.demo.projectD.repository.vo.UtilVo;
 
+
 @Primary
 @Service
 public class UtilServiceImpl implements UtilService {
@@ -45,21 +46,19 @@ public class UtilServiceImpl implements UtilService {
         }
     }
     
-    public UtilVo getUserByName(String name) {
-        return utilDao.findUserByName(name);
+
+    @Override
+    public void registerUser(UtilVo user) {
+        // Add validation or business logic here if needed
+        utilDao.addUser(user);
     }
 
-<<<<<<< Updated upstream
-    public void addUser(String name, String password) {
-        utilDao.addUser(name, password);
-=======
     @Override
     public UtilVo login(String userName, String password) {
-        UtilVo user = utilDao.findByUserName(userName);
+    	UtilVo user = utilDao.findByUserName(userName);
         if (user != null && user.getPassword().equals(password)) {
             return user;
         }
         return null; // Or throw an exception if preferred
->>>>>>> Stashed changes
     }
 }
