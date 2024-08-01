@@ -52,9 +52,19 @@ public class UtilController {
 		return "Login successful";
 	}
 
+<<<<<<< Updated upstream
 	@PostMapping("/signup")
 	public String signup(@RequestBody UtilVo signupRequest) {
 		utilService.addUser(signupRequest.getName(), signupRequest.getPassword());
 		return "Signup successful";
+=======
+	@PostMapping("/login")
+	public UtilVo login(@RequestParam String userName, @RequestParam String password) {
+		UtilVo Util = utilService.login(userName, password);
+		if (Util != null) {
+			return Util;
+		}
+		throw new RuntimeException("Invalid credentials");
+>>>>>>> Stashed changes
 	}
 }

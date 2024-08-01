@@ -49,7 +49,17 @@ public class UtilServiceImpl implements UtilService {
         return utilDao.findUserByName(name);
     }
 
+<<<<<<< Updated upstream
     public void addUser(String name, String password) {
         utilDao.addUser(name, password);
+=======
+    @Override
+    public UtilVo login(String userName, String password) {
+        UtilVo user = utilDao.findByUserName(userName);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null; // Or throw an exception if preferred
+>>>>>>> Stashed changes
     }
 }

@@ -36,12 +36,18 @@ public class UtilDaoImpl implements UtilDao{
 		return sqlSession.selectOne("utils.findUserByName");
 	}
 
+<<<<<<< Updated upstream
 
 	public void addUser(String name, String password) {
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         params.put("password", password);
         sqlSession.insert("com.demo.projectD.repository.UtilDao.addUser", params);
+=======
+    @Override
+    public UtilVo findByUserName(String userName) {
+        return sqlSession.selectOne("utils.findByUserName", userName);
+>>>>>>> Stashed changes
     }
 
 	

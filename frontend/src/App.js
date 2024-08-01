@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+<<<<<<< Updated upstream
 import Login from './components/Login';
 import Signup from './components/Signup';
 
@@ -25,5 +26,28 @@ function App() {
     </div>
   );
 }
+=======
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './MainPage';
+import Signup from './Signup';
+import Login from './Login';
+
+const App = () => {
+    const [message, setMessage] = useState('');
+
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<MainPage />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/login" element={<Login setMessage={setMessage} />} />
+                </Routes>
+                {message && <div className="message">{message}</div>}
+            </div>
+        </Router>
+    );
+};
+>>>>>>> Stashed changes
 
 export default App;
