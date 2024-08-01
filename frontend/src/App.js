@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
+<<<<<<< Updated upstream
 function App() {
   const [activeComponent, setActiveComponent] = useState('login'); // Track which component is active
   const [message, setMessage] = useState('');
@@ -25,5 +26,20 @@ function App() {
     </div>
   );
 }
+=======
+const App = () => {
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<MainPage />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+};
+>>>>>>> Stashed changes
 
 export default App;
