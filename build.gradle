@@ -25,7 +25,9 @@ dependencies {
     
     implementation 'org.slf4j:slf4j-api:1.7.36' // Ensure SLF4J version compatibility
     implementation 'ch.qos.logback:logback-classic:1.4.8' // Update to avoid conflicts
-
+	
+	implementation 'mysql:mysql-connector-java:8.0.30' 
+	
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
