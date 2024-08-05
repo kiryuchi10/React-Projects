@@ -1,5 +1,14 @@
 package com.demo.projectD.repository.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UtilVo {
 	private String orderDate;
 	private long orderId;
@@ -12,6 +21,9 @@ public class UtilVo {
 	private String branchId;
 	private String authCode;
 	private String joinDate;
+	
+	public UtilVo() {
+	}
 	
 	public UtilVo(String orderDate, long orderId, String bookName, int checked, long userNo, String userName,
 			String password, String branchId, String authCode, String joinDate) {
@@ -27,6 +39,7 @@ public class UtilVo {
 		this.authCode = authCode;
 		this.joinDate = joinDate;
 	}
+
 	public String getOrderDate() {
 		return orderDate;
 	}

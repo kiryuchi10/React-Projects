@@ -1,6 +1,7 @@
 package com.demo.projectD.repository.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,8 @@ public interface UtilDao {
 	UtilVo findByUserName(String userName);
 
 	void addUser(UtilVo user);
+
+	UtilVo login(String userName, String password);
 
 
 }

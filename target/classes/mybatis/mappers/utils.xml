@@ -42,8 +42,7 @@
 
 
 	<!-- Query to find a user by email -->
-	<select id="findByUserName" parameterType="String"
-		resultType="com.demo.projectD.repository.vo.UtilVo">
+	<select id="findByUserName" parameterType="String" resultType="com.demo.projectD.repository.vo.UtilVo">
 		SELECT user_no AS userNo,
 		user_name AS userName,
 		password,
@@ -52,5 +51,10 @@
 		FROM users
 		WHERE user_name = #{userName}
 	</select>
-
+	<!-- Define the SQL query for login -->
+    <select id="findByUserNameAndPassword" parameterType="map" resultType="com.demo.projectD.repository.vo.UtilVo">
+        SELECT * FROM users
+        WHERE user_name = #{userName}
+        AND password = #{password}
+    </select>
 </mapper>

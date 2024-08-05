@@ -46,6 +46,10 @@ public class UtilServiceImpl implements UtilService {
         }
     }
     
+    @Override
+	public UtilVo findByUserName(String userName) {
+		return utilDao.findByUserName(userName);
+	}
 
     @Override
     public void registerUser(UtilVo user) {
@@ -53,12 +57,19 @@ public class UtilServiceImpl implements UtilService {
         utilDao.addUser(user);
     }
 
-    @Override
     public UtilVo login(String userName, String password) {
-    	UtilVo user = utilDao.findByUserName(userName);
-        if (user != null && user.getPassword().equals(password)) {
+        // Your login logic here
+        // For example, querying the database for user credentials
+    	// Retrieve user from database
+        UtilVo storedUser = utilDao.findByUserName(userName);
+        // Mocking a successful login for demonstration
+        if (storedUser != null && storedUser.getPassword().equals(password)) {
+            UtilVo user = new UtilVo();
+            user.setUserName(userName);
+            user.setPassword(password);
             return user;
         }
-        return null; // Or throw an exception if preferred
+        return null;
     }
+
 }
